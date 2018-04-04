@@ -1,48 +1,54 @@
 // Dependencies
 var express = require("express");
-var bodyParser = require("body-parser");
+var mongojs = require("mongojs");
 var logger = require("morgan");
-var path = require('path');
-var mongoose = require("mongoose");
-var request = require('request');
-require('dotenv').config();
+var bodyParser = require('body-parser');
 
-var PORT = process.env.PORT || 6969;
+var PORT = process.env.PORT || 3001;
 var app = express();
 
 // Set the app up with morgan
 app.use(logger("dev"));
 
-app.use(bodyParser.urlencoded({
-    extended: false
-  }));
+// set the app up with bodyparser
+app.use(bodyParser());
 
-// =========  Database configuration with mongoose ===============
-// ---------  define local MongoDB URI ----------
-var localMongo = "mongodb://localhost/devtechscraper";
-var MONGODB_URI = 'DB_PASS';
+// Database configuration
+var databaseUrl = process.env.MONGODB_URI || "articles_db";
+var collections = ["articles"];
 
-//mongoose.connect(localMongo);
+// Hook mongojs config to db variable
+var db = mongojs(databaseUrl , collections);
 
-if (process.env.MONGODB_URI) {
-  // this executes if this is being executed in heroku app
-  mongoose.connect(process.env.MONGODB_URI);
-} else {
-  // this ececutes if this is being executed on local machine
-  console.log('Executing in Localhost!')
-  mongoose.connect(localMongo);
-}
-
-// =========  End databse configuration  ================
-
-var db = mongoose.connection;
-
-// Show any mongoose errors
-db.on("error", function (error) {
-  console.log("Mongoose Error: ", error);
+// Log any mongojs errors to console
+db.on("error", function(error) {
+  console.log("Database Error:", error);
 });
 
-// Once logged in to the db through mongoose, log a success message
-db.once("open", function () {
-  console.log("Mongoose connection successful.");
+//route to get all of my books
+app.get('/articles', function(req, res){
+	db.articles.find({}, function(error, result){
+	    res.json(result);
+	});
 });
+
+
+//route to add a book
+app.post('/articlesinsert', function(req, res){
+	// {name: 'to kill a mockingbird'} 
+
+	db.articles.insert(req.body, function(error, savedarticle) {
+	  // Log any errors
+	  if (error) {
+	    res.send(error);
+	  }else {
+	    res.json(savedarticle);
+	  }
+	});
+});
+
+
+// Listen on port 3001
+  app.listen(PORT, function() {
+    console.log('🌎 ==> Now listening on PORT %s! Visit http://localhost:%s in your browser!', PORT, PORT);
+  });

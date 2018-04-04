@@ -1,24 +1,33 @@
 {
   "name": "nytmernstackapp",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "axios": "^0.18.0",
-    "body-parser": "^1.18.2",
-    "cheerio": "^1.0.0-rc.2",
-    "dotenv": "^5.0.1",
-    "mongoose": "^5.0.12",
-    "morgan": "^1.9.0",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.4",
-    "request": "^2.85.0"
-  },
+  "version": "1.0.0",
+  "description": "Retrieves articles from the NYT website and stores them in MongoDB. Then displays them on the page.",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "yarn start",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dscherer21/nytMernStackApp.git"
+  },
+  "keywords": [
+    "MERN",
+    "MongoDB",
+    "Expressjs",
+    "Reactjs",
+    "Nodejs"
+  ],
+  "author": "dscherer21",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dscherer21/nytMernStackApp/issues"
+  },
+  "homepage": "https://github.com/dscherer21/nytMernStackApp#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mongojs": "^2.5.0",
+    "morgan": "^1.9.0"
   }
 }
