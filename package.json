@@ -25,9 +25,12 @@
   },
   "homepage": "https://github.com/dscherer21/nytMernStackApp#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "mongojs": "^2.5.0",
+    "mongoose": "^5.0.13",
     "morgan": "^1.9.0"
   }
 }

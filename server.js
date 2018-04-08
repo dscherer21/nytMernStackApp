@@ -1,54 +1,43 @@
-// Dependencies
-var express = require("express");
-var mongojs = require("mongojs");
-var logger = require("morgan");
-var bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const articleController = require("./controllers/articleController");
+const app = express();
+require('dotenv').config();
+const PORT = process.env.PORT || 3001;
 
-var PORT = process.env.PORT || 3001;
-var app = express();
 
-// Set the app up with morgan
-app.use(logger("dev"));
+// Configure body parser for AJAX requests
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+// Serve up static assets
+app.use(express.static("client/build"));
+// Add routes, both API and view
 
-// set the app up with bodyparser
-app.use(bodyParser());
+app.use(articleController);
 
-// Database configuration
-var databaseUrl = process.env.MONGODB_URI || "articles_db";
-var collections = ["articles"];
+var MONGODB_URI = 'DB_PASS';
+// Set up promises with mongoose
+mongoose.Promise = global.Promise;
+// Connect to the Mongo DB
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/nytMernStackApp",
+  
+);
 
-// Hook mongojs config to db variable
-var db = mongojs(databaseUrl , collections);
+var db = mongoose.connection;
 
-// Log any mongojs errors to console
-db.on("error", function(error) {
-  console.log("Database Error:", error);
+// Show any mongoose errors
+db.on("error", function (error) {
+  console.log("Mongoose Error: ", error);
 });
 
-//route to get all of my books
-app.get('/articles', function(req, res){
-	db.articles.find({}, function(error, result){
-	    res.json(result);
-	});
+// Once logged in to the db through mongoose, log a success message
+db.once("open", function () {
+  console.log("Mongoose connection successful.");
 });
 
-
-//route to add a book
-app.post('/articlesinsert', function(req, res){
-	// {name: 'to kill a mockingbird'} 
-
-	db.articles.insert(req.body, function(error, savedarticle) {
-	  // Log any errors
-	  if (error) {
-	    res.send(error);
-	  }else {
-	    res.json(savedarticle);
-	  }
-	});
+// Start the API server
+app.listen(PORT, function() {
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
-
-
-// Listen on port 3001
-  app.listen(PORT, function() {
-    console.log('🌎 ==> Now listening on PORT %s! Visit http://localhost:%s in your browser!', PORT, PORT);
-  });

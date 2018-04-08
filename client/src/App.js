@@ -1,57 +1,20 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Articles from "./pages/Articles";
+import SavedArticles from "./pages/SavedArticles";
+import NoMatch from "./pages/NoMatch";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-
-        <header>
-          <h1>New York Times Article Reader</h1>
-        </header>
-
-        <main>
-
-          {/* Search Panel */}
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <h3 className="panel-title">Search</h3>
-            </div>
-            <div className="panel-body">
-              Panel content
-            </div>
-          </div>
-
-          {/* Results Panel */}
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <h3 className="panel-title">Results</h3>
-            </div>
-            <div className="panel-body">
-              Panel content
-            </div>
-          </div>
-
-          {/* Saved Articles Panel */}
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <h3 className="panel-title">Saved Articles</h3>
-            </div>
-            <div className="panel-body">
-              Panel content
-            </div>
-          </div>
-
-        </main>
-
-        <footer>
-
-        </footer>
-
-      </div>
-    );
-  }
-}
+const App = () =>
+  <Router>
+    <div>
+      <Switch>
+        <Route exact path="/" component={Articles} />
+        <Route exact path="/articles" component={Articles} />
+        <Route exact path="/savedArticles" component={SavedArticles} />
+        {/* If no url match is found, we send them our generic 404 page */}
+        <Route component={NoMatch} />
+      </Switch>
+    </div>
+  </Router>;
 
 export default App;

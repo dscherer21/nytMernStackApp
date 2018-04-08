@@ -1,0 +1,22 @@
+#view-saved{
+    color:black;
+    position:relative; 
+  }
+  
+  #view-saved:hover {
+    color:white;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: none;
+  }
+  .navbar {
+    background: linear-gradient(75deg, silver, #254147, silver); 
+  
+    border-color: #274046;
+  }
+  
+  h1.text-center {
+  color:#12c8e0;
+  }
