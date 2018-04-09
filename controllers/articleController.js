@@ -42,7 +42,7 @@ router.post("/api/nyt", (req, res) => {
   if(topic.includes(" ")){
     topic = topic.split(" ").join("");
   }
-  const key = NYT_KEY;
+  const key = 'fd60685c0f454b9ab8e3843e53220f65';
   // makes a request to the NYT api with our key, topic, start year and end year injected into our query thanks to ES6's template literals
   const queryURLBase = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${key}&q=${topic}&begin_date=${startYear}&begin_date=${endYear}`;
   axios.get(queryURLBase)

@@ -25,6 +25,8 @@ mongoose.connect(
   
 );
 
+
+
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -36,6 +38,11 @@ db.on("error", function (error) {
 db.once("open", function () {
   console.log("Mongoose connection successful.");
 });
+
+//if running on a deployed site use the build folder
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
 
 // Start the API server
 app.listen(PORT, function() {

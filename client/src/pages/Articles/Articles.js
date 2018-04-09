@@ -83,6 +83,7 @@ class Articles extends React.Component {
         })
         .then(function (response) {
           // This checks to see if we get a response with data back from the API call
+          console.log(response);
           if (Object.keys(response).length > 0 && response.constructor === Object) {
             const articles = response.data.map(article => {
               return {
