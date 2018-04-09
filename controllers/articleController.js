@@ -63,4 +63,9 @@ router.use(function (req, res) {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
+//if running on a deployed site use the build folder
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
 module.exports = router;
