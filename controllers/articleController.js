@@ -59,9 +59,9 @@ router.post("/api/articles", articleFunctions.create)
 router.delete("/api/articles/:id", articleFunctions.remove)
 
 // If no API routes are hit, send the React app
-/*router.use(function (req, res) {
+router.use(function (req, res) {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
-});*/
+});
 
 //if running on a deployed site use the build folder
 /*if (process.env.NODE_ENV === 'production') {
