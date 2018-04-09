@@ -40,14 +40,14 @@ db.once("open", function () {
 });
 
 //if running on a deployed site use the build folder
-/*if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
-}*/
+}
 
 // If no API routes are hit, send the React app
-router.use(function (req, res) {
+/*router.use(function (req, res) {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
-});
+});*/
 
 // Start the API server
 app.listen(PORT, function() {
