@@ -4,15 +4,14 @@ Full MERN Stack app that uses an API from the New York Times website, stores the
 Deployed to Heroku at: Https://nyt-mern-stack.herokuapp.com/
 
 #Languages Used:
-HTML5
-CSS3
-JavaScript
-EcmaScript 6 (ES6)
+HTML5,
+CSS3,
+JavaScript (ES6)
 
 #Technologies Used:
-BootStrap
-JQuery
-Node.js
-Express.js
-MongoDB
+BootStrap,
+JQuery,
+Node.js,
+Express.js,
+MongoDB,
 React.js
